@@ -1,4 +1,4 @@
-package com.example.demo.appuser;
+package com.example.demo.models;
 
 
 import javax.persistence.*;
@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Entity
 @Table(name= "users")
 public class User {
-
+    //kathorismos pinaka user kai twn pediwn tou me pk to id
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY )
     private Long id;
