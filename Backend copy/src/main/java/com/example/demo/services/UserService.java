@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService{
@@ -30,15 +31,19 @@ public class UserService{
         return userepo.findById(id).orElseThrow(()->new NotFoundException("User","Id",id));
     }
 
+    public List<User> getUsersWithName(String firstName){
+       return userepo.findUsersWithName(firstName);
+    }
+
     public User updateUser(User user, Long id){
 
         User existingUser = userepo.findById(id).orElseThrow(
         ()-> new NotFoundException("User","id",id));
 
-        existingUser.setFirstName(user.getFirstName());
-        existingUser.setLastName(user.getLastName());
-        existingUser.setUsername(user.getUsername());
-        existingUser.setPassword(user.getPassword());
+        existingUser.setFirstName(existingUser.getFirstName());
+        existingUser.setLastName(existingUser.getLastName());
+        existingUser.setUsername(existingUser.getUsername());
+        existingUser.setPassword(existingUser.getPassword());
 
         userepo.save(existingUser);
 
@@ -51,9 +56,5 @@ public class UserService{
                 ()-> new NotFoundException("User","id",id));
 
         userepo.deleteById(id);
-    }
-
-    public List<User> getUsersWithName(String firstName){
-        return userepo.findbyName(firstName);
     }
 }

@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    //The JPA repository is the interface that contains methods that make the db queries like findAll(),findById(),etc.
-    @Query(value="SELECT u FROM User u WHERE u.firstName LIKE %?1%")
-    public List<User> findbyName(String firstName);
+    @Query("SELECT u FROM User u WHERE u.firstName LIKE %?1%")
+    public List<User> findUsersWithName(String firstName);
 }

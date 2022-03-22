@@ -26,37 +26,31 @@ public class UserController {
         this.userservice = userservice;
     }
 
-    //Method that posts new users in the db
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<User> saveUser(@RequestBody User user) {
         return new ResponseEntity<User>(userservice.saveUser(user), HttpStatus.CREATED);
     }
 
-    //Method that gets all the users that are in db.
     @GetMapping
     public List<User> fetchUsers() {
         return userepo.findAll();
     }
 
-    //Search of a single user by id.
-    @RequestMapping("/byid/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") long userid){
         return new ResponseEntity<User>(userservice.findUserById(userid),HttpStatus.OK);
     }
 
-    //Search of users by firstname like the "firstname" value that we give.
-    @RequestMapping("/byname/{firstName}")
-    public List<User> findByName(@PathVariable("firstName") String firstName){
+    /*@GetMapping("{firstName}")
+    public List<User> getUsersWithName(@PathVariable String firstName){
         return userservice.getUsersWithName(firstName);
-    }
+    }*/
 
-    //Update(put) method of the user with id= {id}.
     @PutMapping("{id}")
     public ResponseEntity<User> updateUser(@PathVariable("id") Long id, @RequestBody User user){
         return new ResponseEntity<User>(userservice.updateUser(user,id),HttpStatus.OK);
     }
 
-    //Delete of the user with the given id.
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteUser(@PathVariable("id") Long id){
 
